@@ -42,3 +42,40 @@ class HoneypotSimulator:
             "medium":{"max_threads":5, "delay_range":(0.5, 1.5)},
             "high":{"max_threads":10, "delay_range":(0.1,0.5)}
         }
+    
+    def simulate_conn(self, port):
+        """
+        Simulates a connection attempt to a specific port with realistic attack patterns
+        """
+        try:
+
+            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            sock.settimeout(3)
+
+            print(f"[*] Attempting connection to {self.target_ip}:{port}")
+            sock.connect((self.target_ip, port))
+
+            banner = sock.recv(1024)
+            print(f"[+] Received banner from port {port}: {banner.decode('utf-8', 'ignore').strip()}")
+
+            if port in self.attack_patterns:
+                for command in self.attack_patterns[port]:
+                    print(f"[*] Sending command to port {port}: {command.strip()}")
+                    sock.send(command.encode())
+
+                    try:
+                        response = sock.recv(1024)
+                        print(f"[+] Received response: {response.decode('utf-8', 'ignore').strip()}")
+                    except socket.timeout:
+                        print(f"[-] No response received from port {port}")
+                    
+
+                    time.sleep(random.uniform(*self.intensity_settings[self.intensity]["delay range"]))
+            
+            sock.close()
+        except ConnectionRefusedError:
+            print(f"[-] Connection refused on port {port}")
+        except socket.timeout:
+            print(f"[-] Connection timeout on port {port}")
+        except Exception as e:
+            print(f"[-] Error connecting to port {port}: {e}")
