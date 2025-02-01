@@ -140,3 +140,38 @@ class HoneypotSimulator:
             # Randomly choose and execute an attack pattern
             executor.submit(random.choice(simulation_choices))
             time.sleep(random.uniform(*self.intensity_settings[self.intensity]["delay_range"]))
+
+def main():
+    """
+    Main function to run the simulator
+    """
+    parser = argparse.ArgumentParser(description="Honeypot Attack Simulator")
+    parser.add_argument("--target", default="127.0.0.1", help="Target IP address")
+    parser.add_argument(
+        "--intensity",
+        choices=["low","medium","high"],
+        default = "medium",
+        help = "Simulation intensity level"
+    )
+    parser.add_argument(
+        "--duration",
+        type=int,
+        default=300,
+        help="Simulation duration in seconds"
+    )
+
+    args = parser.parse_args()
+
+    simulator = HoneypotSimulator(args.target, args.intensity)
+
+    try:
+        simulator.run_continuous_simulation(args.duration)
+    except KeyboardInterrupt:
+        print("\n[*] Simulation interrupted by user")
+    except Exception as e:
+        print(f"[-] Simulation error: {e}")
+    finally:
+        print("\n[*] Simulation complete")
+
+if __name__ == "__main__":
+    main()
