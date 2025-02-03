@@ -39,7 +39,7 @@ This repository contains a Python-based medium-interaction honeypot designed to 
    cd honeypot-project
 
 2. Usage
-    - Running the Honeypot and to test the simulation
+    ## Running the Honeypot and to test the simulation
     ```bash
     python honypot.py
     python honeypot_sim.py
