@@ -21,14 +21,6 @@ This repository contains a Python-based medium-interaction honeypot designed to 
   - Temporal pattern analysis: Identifying attack trends over time.
   - Behavioral pattern analysis: Detecting recurring attacker behaviors and anomalies.
 
----
-
-## File Structure
-.
-|-- honeypot.py          # Core honeypot implementation
-|-- honeypot_sim.py      # Simulation script to test the honeypot
-|-- logs/                # Directory to store generated logs
-|-- README.md            # Project documentation
 
 ---
 
@@ -45,3 +37,18 @@ This repository contains a Python-based medium-interaction honeypot designed to 
    ```bash
    git clone https://github.com/02Manas-jha/Honeypot.git
    cd honeypot-project
+
+2. Usage
+    Running the Honeypot
+
+        Start the honeypot:
+    ```bash
+    python honypot.py
+
+    Logs will be generated and saved in the honeypot_logs/ directory.
+
+    Testing the Honeypot
+
+    Use the stimulation script to simulate attack scenarios:
+    ```bash
+    python honeypot_sim.py
