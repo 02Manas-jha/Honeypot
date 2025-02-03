@@ -39,14 +39,7 @@ This repository contains a Python-based medium-interaction honeypot designed to 
    cd honeypot-project
 
 2. Usage
-    - Running the Honeypot
+    - Running the Honeypot and to test the simulation
     ```bash
     python honypot.py
-
-    - Logs will be generated and saved in the honeypot_logs/ directory.
-
-    - Testing the Honeypot
-
-    - Use the stimulation script to simulate attack scenarios:
-    ```bash
     python honeypot_sim.py
